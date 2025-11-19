@@ -7,7 +7,7 @@ public class Encryptor {
     // Encrypt a plain password
     public static String encrypt(String plainPassword) {
         String base64 = Base64.getEncoder().encodeToString(plainPassword.getBytes());
-        return "MPM_" + base64; // طبقة بسيطة فوق Base64
+        return "MPM_" + base64; //  Base64
     }
 
     // Decrypt the encrypted password
