@@ -13,7 +13,10 @@ public class Main {
             System.out.println("\n1. Add Password");
             System.out.println("2. List Passwords");
             System.out.println("3. Search Password");
-            System.out.println("4. Exit");
+            System.out.println("4. Update Password");
+            System.out.println("5. Delete Password");
+            System.out.println("6. Exit");
+
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
 
@@ -36,6 +39,20 @@ public class Main {
                     manager.searchPassword(searchSite);
                     break;
                 case "4":
+                    System.out.print("Site to update: ");
+                    String updateSite = scanner.nextLine();
+                    System.out.print("New Username: ");
+                    String newUsername = scanner.nextLine();
+                    System.out.print("New Password: ");
+                    String newPassword = scanner.nextLine();
+                    manager.updatePassword(updateSite, newUsername, newPassword);
+                    break;
+                case "5":
+                    System.out.print("Site to delete: ");
+                    String deleteSite = scanner.nextLine();
+                    manager.deletePassword(deleteSite);
+                    break;
+                case "6":
                     exit = true;
                     System.out.println("Goodbye!");
                     break;
@@ -43,6 +60,7 @@ public class Main {
                     System.out.println("Invalid option.");
             }
         }
+
         scanner.close();
     }
 }

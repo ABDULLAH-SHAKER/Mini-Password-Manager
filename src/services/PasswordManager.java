@@ -5,7 +5,6 @@ import utils.Encryptor;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class PasswordManager {
 
@@ -47,6 +46,36 @@ public class PasswordManager {
             }
         }
         if (!found) System.out.println("No matching site found.");
+    }
+
+    // Delete password by site
+    public void deletePassword(String site) {
+        boolean removed = entries.removeIf(entry -> entry.getSiteName().equalsIgnoreCase(site));
+        if (removed) {
+            saveToFile();
+            System.out.println("Password deleted successfully!");
+        } else {
+            System.out.println("No matching site found to delete.");
+        }
+    }
+
+    // Update password by site
+    public void updatePassword(String site, String newUsername, String newPassword) {
+        boolean found = false;
+        for (int i = 0; i < entries.size(); i++) {
+            PasswordEntry entry = entries.get(i);
+            if (entry.getSiteName().equalsIgnoreCase(site)) {
+                entries.set(i, new PasswordEntry(site, newUsername, Encryptor.encrypt(newPassword)));
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            saveToFile();
+            System.out.println("Password updated successfully!");
+        } else {
+            System.out.println("No matching site found to update.");
+        }
     }
 
     // Save to file
